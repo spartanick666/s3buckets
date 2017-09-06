@@ -2,7 +2,14 @@ import boto3
 
 # Let's use Amazon S3
 s3 = boto3.resource('s3')
+bucket_list = []
 
-# Print out bucket names
-for bucket in s3.buckets.all():
-    print(bucket.name)
+for x in s3.buckets.all():
+    bucket_list.append(x.name)
+print (bucket_list)
+
+s3 = boto3.client('s3')
+
+for y in bucket_list:
+    result = s3.get_bucket_acl(Bucket=y)
+    print(result)
